@@ -1,103 +1,122 @@
-import Image from "next/image";
+"use client";
+import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  let [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const data = [
+    { icon: "😊", mood: "Happy", message: [""] },
+    { icon: "🥲", mood: "Sad", message: [""] },
+    { icon: "😠", mood: "Angry", message: [""] },
+    { icon: "😶‍🌫️", mood: "Judged", message: [""] },
+    { icon: "😐", mood: "Offended", message: [""] },
+    { icon: "❌", mood: "Rejected", message: [""] },
+    { icon: "🙏", mood: "Thankful", message: [""] },
+    { icon: "💡", mood: "Inpired", message: [""] },
+    { icon: "🤩", mood: "Motivated", message: [""] },
+    { icon: "☹️", mood: "Depressed", message: [""] },
+    { icon: "🥀", mood: "Desperate", message: [""] },
+    { icon: "😖", mood: "Heavy", message: [""] },
+    { icon: "😪", mood: "Fatigued", message: [""] },
+    { icon: "", mood: "Drained", message: [""] },
+    { icon: "😩", mood: "Weary", message: [""] },
+    { icon: "", mood: "Insecure", message: [""] },
+    { icon: "", mood: "Tense", message: [""] },
+    { icon: "", mood: "Panicky", message: [""] },
+    { icon: "", mood: "Terrified", message: [""] },
+    { icon: "", mood: "Embarrased", message: [""] },
+    { icon: "", mood: "Humiliated", message: [""] },
+    { icon: "", mood: "Guilty", message: [""] },
+  ];
+
+  function open() {
+    setIsOpen(true);
+  }
+
+  function close() {
+    setIsOpen(false);
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const mood = formData.get("mood");
+    const selected = data.find((item) => item.mood === mood);
+    if (selected && selected.message.length > 0) {
+      const randomIndex = Math.floor(Math.random() * selected.message.length);
+      setMessage(selected.message[randomIndex]);
+      console.log(`Selected message: ${selected.message[randomIndex]}`);
+    }
+    open();
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <div className="text-xl/10 text-black/90 text-justify">
+        Hello beautiful! 🥀💗, I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {data.map((item) => (
+          <div
+            key={item.mood}
+            className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <p className="text-4xl text-center">{item.icon}</p>
+            <h2 className="text-xl font-semibold text-center">
+              For when you're feeling {item.mood}
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="mood"
+                defaultValue={item.mood}
+                className="hidden"
+              />
+              <input
+                type="submit"
+                value={"💌 open me"}
+                className="w-full inline-flex items-center gap-2 rounded-md bg-pink-700 px-3 py-1.5 font-semibold text-white shadow-inner shadow-white/10 text-lg hover:bg-pink-600 hover:cursor-pointer transition-colors duration-200"
+              />
+            </form>
+          </div>
+        ))}
+      </div>
+
+      <Dialog
+        open={isOpen}
+        as="div"
+        className="relative z-10 focus:outline-none"
+        onClose={close}
+      >
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <DialogPanel
+              transition
+              className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+            >
+              <DialogTitle
+                as="h3"
+                className="text-base/7 font-medium text-black uppercase text-center"
+              >
+                I hope you're doing okay 🥀💗
+              </DialogTitle>
+              <p className="mt-2 text-md/6 text-black/80 text-justify">
+                {message}
+              </p>
+              <div className="mt-4">
+                <Button
+                  className="w-full text-center gap-2 rounded-md bg-pink-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-pink-600 data-open:bg-pink-700"
+                  onClick={close}
+                >
+                  Close
+                </Button>
+              </div>
+            </DialogPanel>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </Dialog>
     </div>
   );
 }
