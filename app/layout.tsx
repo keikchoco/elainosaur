@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} antialiased h-full`}
+        className={`${geistSans.variable} antialiased h-full overflow-x-hidden`}
       >
         <div className="from-pink-100 to-pink-200 bg-gradient-to-b flex items-center flex-col">
           <div className="flex flex-col items-center min-h-screen gap-4 w-10/12 pt-4 pb-12">

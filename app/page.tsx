@@ -7,28 +7,30 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   const data = [
-    { icon: "😊", mood: "Happy", message: [""] },
-    { icon: "🥲", mood: "Sad", message: [""] },
-    { icon: "😠", mood: "Angry", message: [""] },
-    { icon: "😶‍🌫️", mood: "Judged", message: [""] },
-    { icon: "😐", mood: "Offended", message: [""] },
-    { icon: "❌", mood: "Rejected", message: [""] },
-    { icon: "🙏", mood: "Thankful", message: [""] },
-    { icon: "💡", mood: "Inpired", message: [""] },
-    { icon: "🤩", mood: "Motivated", message: [""] },
-    { icon: "☹️", mood: "Depressed", message: [""] },
-    { icon: "🥀", mood: "Desperate", message: [""] },
-    { icon: "😖", mood: "Heavy", message: [""] },
-    { icon: "😪", mood: "Fatigued", message: [""] },
-    { icon: "", mood: "Drained", message: [""] },
-    { icon: "😩", mood: "Weary", message: [""] },
-    { icon: "", mood: "Insecure", message: [""] },
-    { icon: "", mood: "Tense", message: [""] },
-    { icon: "", mood: "Panicky", message: [""] },
-    { icon: "", mood: "Terrified", message: [""] },
-    { icon: "", mood: "Embarrased", message: [""] },
-    { icon: "", mood: "Humiliated", message: [""] },
-    { icon: "", mood: "Guilty", message: [""] },
+    { icon: "💔", mood: "For when you miss me", message: [""] },
+    { icon: "😊", mood: "For when you're feeling happy", message: [""] },
+    { icon: "🥲", mood: "For when you're feeling sad", message: [""] },
+    { icon: "😠", mood: "For when you're feeling angry", message: [""] },
+    { icon: "😶‍🌫️", mood: "For when you're feeling judged", message: [""] },
+    { icon: "😐", mood: "For when you're feeling offended", message: [""] },
+    { icon: "❌", mood: "For when you're feeling rejected", message: [""] },
+    { icon: "🙏", mood: "For when you're feeling thankful", message: [""] },
+    { icon: "💡", mood: "For when you're feeling inpired", message: [""] },
+    { icon: "🤩", mood: "For when you're feeling motivated", message: [""] },
+    { icon: "☹️", mood: "For when you're feeling depressed", message: [""] },
+    { icon: "🥀", mood: "For when you're feeling desperate", message: [""] },
+    { icon: "😖", mood: "For when you're feeling heavy", message: [""] },
+    { icon: "😪", mood: "For when you're feeling fatigued", message: [""] },
+    { icon: "🫠", mood: "For when you're feeling drained", message: [""] },
+    { icon: "🫂", mood: "For when you're feeling lonely", message: [""] },
+    { icon: "😩", mood: "For when you're feeling weary", message: [""] },
+    { icon: "🫥", mood: "For when you're feeling insecure", message: [""] },
+    { icon: "😬", mood: "For when you're feeling tense", message: [""] },
+    { icon: "🫨", mood: "For when you're feeling panicky", message: [""] },
+    { icon: "😰", mood: "For when you're feeling terrified", message: [""] },
+    { icon: "😳", mood: "For when you're feeling embarrased", message: [""] },
+    { icon: "🤕", mood: "For when you're feeling humiliated", message: [""] },
+    { icon: "😓", mood: "For when you're feeling guilty", message: [""] },
   ];
 
   function open() {
@@ -54,10 +56,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center gap-8">
-      <div className="text-xl/10 text-black/90 text-justify">
-        {"Hello beautiful! 🥀💗, I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now"}
+      <div className="text-xl/10 text-black/90 2xl:text-justify text-center">
+        {"Hello beautiful! 💗 I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now"}
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 2xl:grid-cols-4 gap-4">
         {data.map((item) => (
           <div
             key={item.mood}
@@ -65,7 +67,7 @@ export default function Home() {
           >
             <p className="text-4xl text-center">{item.icon}</p>
             <h2 className="text-xl font-semibold text-center">
-              {"For when you're feeling "}{item.mood}
+              {item.mood}
             </h2>
             <form onSubmit={handleSubmit}>
               <input
@@ -90,7 +92,7 @@ export default function Home() {
         className="relative z-10 focus:outline-none"
         onClose={close}
       >
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/50 backdrop-blur-sm">
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
