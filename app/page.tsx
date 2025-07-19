@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="text-xl/10 text-black/90 text-justify">
-        Hello beautiful! 🥀💗, I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now
+        {"Hello beautiful! 🥀💗, I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now"}
       </div>
       <div className="grid grid-cols-4 gap-4">
         {data.map((item) => (
@@ -65,7 +65,7 @@ export default function Home() {
           >
             <p className="text-4xl text-center">{item.icon}</p>
             <h2 className="text-xl font-semibold text-center">
-              For when you're feeling {item.mood}
+              {"For when you're feeling "}{item.mood}
             </h2>
             <form onSubmit={handleSubmit}>
               <input
@@ -100,7 +100,7 @@ export default function Home() {
                 as="h3"
                 className="text-base/7 font-medium text-black uppercase text-center"
               >
-                I hope you're doing okay 🥀💗
+                {"I hope you're doing okay 🥀💗"}
               </DialogTitle>
               <p className="mt-2 text-md/6 text-black/80 text-justify">
                 {message}

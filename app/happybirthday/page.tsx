@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HappyBirthday() {
@@ -16,7 +17,8 @@ export default function HappyBirthday() {
         Perspiciatis nesciunt, pariatur asperiores tempora error voluptatibus optio architecto nostrum adipisci rem ducimus ut voluptatum possimus cumque necessitatibus perferendis debitis exercitationem ipsam. Voluptatum magnam nostrum nihil praesentium, recusandae quaerat eaque.
         Facilis minima accusantium modi numquam quod repudiandae molestias, natus suscipit nesciunt. Asperiores, voluptas! Cumque laborum asperiores sequi libero, aliquam beatae voluptates cupiditate ratione, recusandae similique aspernatur at fugit voluptate vero?
       </p>
-      <img
+      <Image
+        width={256}
         src="/images/birthday-cake.png"
         alt="Birthday Cake"
         className="w-64 h-auto"
