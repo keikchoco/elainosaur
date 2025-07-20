@@ -23,7 +23,7 @@ export default function Home() {
     { icon: "😐", mood: "For when you're feeling offended", message: [""] },
     { icon: "❌", mood: "For when you're feeling rejected", message: [""] },
     { icon: "🙏", mood: "For when you're feeling thankful", message: [""] },
-    { icon: "💡", mood: "For when you're feeling inpired", message: [""] },
+    { icon: "💡", mood: "For when you're feeling inspired", message: [""] },
     { icon: "🤩", mood: "For when you're feeling motivated", message: [""] },
     { icon: "☹️", mood: "For when you're feeling depressed", message: [""] },
     { icon: "🥀", mood: "For when you're feeling desperate", message: [""] },
