@@ -7,7 +7,15 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   const data = [
-    { icon: "💔", mood: "For when you miss me", message: [""] },
+    {
+      icon: "💔",
+      mood: "For when you miss me",
+      message: [
+        "Test Message",
+        "Isa pang test message mas mahaba tinitignan ko lang gano kahaba pwede kong isulat dito sana naman d pa to lumalagpas",
+        "pangatlong test message sybau",
+      ],
+    },
     { icon: "😊", mood: "For when you're feeling happy", message: [""] },
     { icon: "🥲", mood: "For when you're feeling sad", message: [""] },
     { icon: "😠", mood: "For when you're feeling angry", message: [""] },
@@ -57,7 +65,9 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="text-xl/10 text-black/90 2xl:text-justify text-center">
-        {"Hello beautiful! 💗 I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now"}
+        {
+          "Hello beautiful! 💗 I have made messages for when you're feeling things. Feel free to open whichever you're feeling right now"
+        }
       </div>
       <div className="grid grid-cols-2 2xl:grid-cols-4 gap-4">
         {data.map((item) => (
@@ -66,9 +76,7 @@ export default function Home() {
             className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2"
           >
             <p className="text-4xl text-center">{item.icon}</p>
-            <h2 className="text-xl font-semibold text-center">
-              {item.mood}
-            </h2>
+            <h2 className="text-xl font-semibold text-center">{item.mood}</h2>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"

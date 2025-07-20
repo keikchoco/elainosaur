@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="w-full px-3 py-2 flex flex-row justify-between">
+    <header className="w-full px-3 py-2 flex flex-row justify-between z-1">
       <h1 className="flex items-center gap-2 text-xl font-semibold">
         <Image src={"/images/heart.png"} alt="heart" width={24} height={24} />
         elainosaur
