@@ -1,45 +1,23 @@
 "use client";
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [data, setData] = useState<any[]>([]);
 
-  const data = [
-    {
-      icon: "💔",
-      mood: "For when you miss me",
-      message: [
-        "Test Message",
-        "Isa pang test message mas mahaba tinitignan ko lang gano kahaba pwede kong isulat dito sana naman d pa to lumalagpas",
-        "pangatlong test message sybau",
-      ],
-    },
-    { icon: "😊", mood: "For when you're feeling happy", message: [""] },
-    { icon: "🥲", mood: "For when you're feeling sad", message: [""] },
-    { icon: "😠", mood: "For when you're feeling angry", message: [""] },
-    { icon: "😶‍🌫️", mood: "For when you're feeling judged", message: [""] },
-    { icon: "😐", mood: "For when you're feeling offended", message: [""] },
-    { icon: "❌", mood: "For when you're feeling rejected", message: [""] },
-    { icon: "🙏", mood: "For when you're feeling thankful", message: [""] },
-    { icon: "💡", mood: "For when you're feeling inspired", message: [""] },
-    { icon: "🤩", mood: "For when you're feeling motivated", message: [""] },
-    { icon: "☹️", mood: "For when you're feeling depressed", message: [""] },
-    { icon: "🥀", mood: "For when you're feeling desperate", message: [""] },
-    { icon: "😖", mood: "For when you're feeling heavy", message: [""] },
-    { icon: "😪", mood: "For when you're feeling fatigued", message: [""] },
-    { icon: "🫠", mood: "For when you're feeling drained", message: [""] },
-    { icon: "🫂", mood: "For when you're feeling lonely", message: [""] },
-    { icon: "😩", mood: "For when you're feeling weary", message: [""] },
-    { icon: "🫥", mood: "For when you're feeling insecure", message: [""] },
-    { icon: "😬", mood: "For when you're feeling tense", message: [""] },
-    { icon: "🫨", mood: "For when you're feeling panicky", message: [""] },
-    { icon: "😰", mood: "For when you're feeling terrified", message: [""] },
-    { icon: "😳", mood: "For when you're feeling embarrased", message: [""] },
-    { icon: "🤕", mood: "For when you're feeling humiliated", message: [""] },
-    { icon: "😓", mood: "For when you're feeling guilty", message: [""] },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/moods");
+      if (res.ok) {
+        const moods = await res.json();
+        setData(moods);
+      }
+    };
+    fetchData();
+  }, []);
 
   function open() {
     setIsOpen(true);
