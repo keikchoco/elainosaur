@@ -2,11 +2,16 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState, useEffect } from "react";
 
+type Mood = {
+  mood: string;
+  icon: string;
+  message: string[];
+};
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Mood[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
