@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cicssg">
       <body
         className={`${geistSans.variable} antialiased h-full overflow-x-hidden`}
       >
