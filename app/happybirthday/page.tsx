@@ -18,7 +18,7 @@ export default function HappyBirthday() {
 
   return (
     <div>
-      <div className="w-full h-full absolute z-0 top-0 left-0">
+      <div className="w-full h-full fixed z-0 top-0 left-0">
         <Particles
           particleColors={["#f7a1ff", "#f7a1ff"]}
           particleCount={200}
