@@ -127,13 +127,13 @@ export default function HappyBirthday() {
       >
         <h1 className="text-4xl font-bold animate-bounce animate-infinite animate-duration-[2000ms] animate-ease-in text-white text-center">
           🎉
-          <br className="2xl:hidden" />
+          <br className="xl:hidden" />
           Happy Birthday{" "}
           <span className="text-cyan-700">
-            <br className="2xl:hidden" />
+            <br className="xl:hidden" />
             Elaine
           </span>
-          !<br className="2xl:hidden" />
+          !<br className="xl:hidden" />
           🎉
         </h1>
       </div>
@@ -141,9 +141,9 @@ export default function HappyBirthday() {
       <div className="flex flex-col items-center gap-8 z-998">
         <h1 className="text-4xl font-bold animate-bounce animate-infinite animate-duration-[2000ms] animate-ease-in text-center text-black/80">
           🎉
-          <br className="2xl:hidden" />
+          <br className="xl:hidden" />
           Happy Birthday <span className="text-cyan-700">Elaine</span>!
-          <br className="2xl:hidden" />
+          <br className="xl:hidden" />
           🎉
         </h1>
         <ScrollReveal
@@ -184,9 +184,9 @@ export default function HappyBirthday() {
 
         <h1 className="text-4xl font-bold animate-bounce animate-infinite animate-duration-[2000ms] animate-ease-in text-center text-black/80">
           🎉
-          <br className="2xl:hidden" />
+          <br className="xl:hidden" />
           First things first!
-          <br className="2xl:hidden" />
+          <br className="xl:hidden" />
           🎉
         </h1>
         <ScrollReveal
@@ -318,7 +318,6 @@ export default function HappyBirthday() {
         </p> */}
 
         <br />
-        {/* <br /> */}
         <Link
           href={"/"}
           className="text-3xl bg-white/70 px-4 py-3 rounded-2xl animate-wiggle animate-infinite animate-duration-[3000ms] animate-ease-in hover:bg-white hover:scale-105 text-center z-998 text-black/80"

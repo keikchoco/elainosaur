@@ -1,9 +1,9 @@
 "use client";
+import AnimatedContent from "@/components/AnimatedContent";
+import FadeContent from "@/components/FadeContent";
 import TextCursor from "@/components/TextCursor";
 import { createAccess } from "@/utils/access-log";
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { ObjectId } from "mongodb";
-// import { cookies } from "next/headers";
 import { useState, useEffect } from "react";
 
 type Mood = {
@@ -12,6 +12,8 @@ type Mood = {
   icon: string;
   message: string[];
 };
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // TO DO: Add logging for opened mood messages to prevent it from showing the same message repeatedly on the same session
 export default function Home() {
@@ -24,7 +26,12 @@ export default function Home() {
       const res = await fetch("/api/moods");
       if (res.ok) {
         const moods = await res.json();
-        setData(moods);
+
+        moods.forEach((mood: Mood, i: number) => {
+          delay(i * 100).then(() => {
+            setData((prevData) => [...prevData, mood]);
+          });
+        });
       }
     };
     fetchData();
@@ -63,53 +70,58 @@ export default function Home() {
           }
         </div>
         {data.length > 0 ? (
-          <div className="grid grid-cols-2 2xl:grid-cols-4 gap-4 z-10 text-black/80">
-            {data.map((item) => (
-              <div
-                key={item.mood}
-                className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2"
+          <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 z-10 text-black/80">
+            {data.map((item, i) => (
+              <FadeContent
+                key={item._id}
+                blur={true}
+                duration={100}
+                easing="ease-out"
+                initialOpacity={0}
               >
-                <p className="text-4xl text-center">{item.icon}</p>
-                <pre className="text-lg font-normal text-center text-wrap">
-                  {item.mood}
-                </pre>
-                <form onSubmit={handleSubmit} className="mt-auto">
-                  <input
-                    type="text"
-                    name="moodId"
-                    defaultValue={item._id}
-                    className="hidden"
-                  />
-                  <input
-                    type="submit"
-                    value={"💌 open me"}
-                    className="w-full inline-flex items-center gap-2 rounded-md bg-pink-700 px-3 py-1.5 font-semibold text-white shadow-inner shadow-white/10 text-lg hover:bg-pink-600 hover:cursor-pointer transition-colors duration-200"
-                  />
-                </form>
-              </div>
+                <div className="h-full p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2">
+                  <p className="text-4xl text-center">{item.icon}</p>
+                  <pre className="text-lg font-normal text-center text-wrap">
+                    {item.mood}
+                  </pre>
+                  <form onSubmit={handleSubmit} className="mt-auto">
+                    <input
+                      type="text"
+                      name="moodId"
+                      defaultValue={item._id}
+                      className="hidden"
+                    />
+                    <input
+                      type="submit"
+                      value={"💌 open me"}
+                      className="w-full inline-flex items-center gap-2 rounded-md bg-pink-700 px-3 py-1.5 font-semibold text-white shadow-inner shadow-white/10 text-lg hover:bg-pink-600 hover:cursor-pointer transition-colors duration-200"
+                    />
+                  </form>
+                </div>
+              </FadeContent>
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 2xl:grid-cols-4 gap-4 z-10">
+          <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 z-10">
             <div className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2 items-center">
               <div className="skeleton h-10 w-10"></div>
-              <div className="skeleton h-4 w-40"></div>
-              <div className="skeleton h-8 w-64"></div>
+              <div className="skeleton h-4 w-30 xl:w-40"></div>
+              <div className="skeleton h-8 w-38 xl:w-64"></div>
             </div>
             <div className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2 items-center">
               <div className="skeleton h-10 w-10"></div>
-              <div className="skeleton h-4 w-40"></div>
-              <div className="skeleton h-8 w-64"></div>
+              <div className="skeleton h-4 w-30 xl:w-40"></div>
+              <div className="skeleton h-8 w-38 xl:w-64"></div>
             </div>
             <div className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2 items-center">
               <div className="skeleton h-10 w-10"></div>
-              <div className="skeleton h-4 w-40"></div>
-              <div className="skeleton h-8 w-64"></div>
+              <div className="skeleton h-4 w-30 xl:w-40"></div>
+              <div className="skeleton h-8 w-38 xl:w-64"></div>
             </div>
             <div className="p-4 border border-pink-500 rounded-lg bg-white/40 shadow-md flex flex-col gap-2 items-center">
               <div className="skeleton h-10 w-10"></div>
-              <div className="skeleton h-4 w-40"></div>
-              <div className="skeleton h-8 w-64"></div>
+              <div className="skeleton h-4 w-30 xl:w-40"></div>
+              <div className="skeleton h-8 w-38 xl:w-64"></div>
             </div>
           </div>
         )}
@@ -130,7 +142,7 @@ export default function Home() {
                   as="h3"
                   className="text-base/7 font-medium text-black uppercase text-center"
                 >
-                  {"I hope you're doing okay 🥀💗"}
+                  {"Hi Elaine!! 🫶"}
                 </DialogTitle>
                 <p className="mt-2 text-md/6 text-black/80 text-justify">
                   {message}
